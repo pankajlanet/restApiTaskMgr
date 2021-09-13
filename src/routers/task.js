@@ -2,6 +2,7 @@ const express = require('express')
 const Task = require('../models/task')
 const router = new express.Router()
 
+//postman
 router.post('/tasks', async (req, res) => {
     const task = new Task(req.body)
 
@@ -13,6 +14,7 @@ router.post('/tasks', async (req, res) => {
     }
 })
 
+//postman
 router.get('/tasks', async (req, res) => {
     try {
         const tasks = await Task.find({})
@@ -22,6 +24,8 @@ router.get('/tasks', async (req, res) => {
     }
 })
 
+
+//postman
 router.get('/tasks/:id', async (req, res) => {
     const _id = req.params.id
 
@@ -38,6 +42,7 @@ router.get('/tasks/:id', async (req, res) => {
     }
 })
 
+//postman
 router.patch('/tasks/:id', async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['description', 'completed']
@@ -62,7 +67,7 @@ router.patch('/tasks/:id', async (req, res) => {
         res.status(400).send(e)
     }
 })
-
+//postman
 router.delete('/tasks/:id', async (req, res) => {
     try {
         const task = await Task.findByIdAndDelete(req.params.id)
