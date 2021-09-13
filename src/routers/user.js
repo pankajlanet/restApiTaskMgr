@@ -52,6 +52,28 @@ router.get('/users/me',auth , async (req,res) => {
 })
 
 
+//end point for logout
+router.post('/users/logout', auth , async( req,res) => {
+
+    res.send( req.user.token)
+
+    try{
+        // req.user.tokens = req.user.tokens.filter((token) => {
+        //     return token.token !== req.token
+
+        // } )
+
+        // await req.user.save();
+        // res.send()
+
+    }
+    catch(e)
+    {
+        res.status(500).send("unable to connect to server")
+    }
+
+
+} )
 
 
 //postman
