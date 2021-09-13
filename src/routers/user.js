@@ -1,10 +1,15 @@
 const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
+const auth = require('../middleware/auth')
+
 
 //postman
+
+//we will pass the middleware funtion as second argument
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
+    
 
     try {
         await user.save()
@@ -31,15 +36,23 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-//postman
-router.get('/users', async (req, res) => {
-    try {
-        const users = await User.find({})
-        res.send(users)
-    } catch (e) {
-        res.status(500).send()
-    }
+
+// router.get('/users',auth , async (req, res) => {
+//     try {
+//         const users = await User.find({})
+//         res.send(users)
+//     } catch (e) {
+//         res.status(500).send()
+//     }
+// })
+
+router.get('/users/me',auth , async (req,res) => {
+    res.send(req.user )
+  
 })
+
+
+
 
 //postman
 router.get('/users/:id', async (req, res) => {
