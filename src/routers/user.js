@@ -54,17 +54,19 @@ router.get('/users/me',auth , async (req,res) => {
 
 //end point for logout
 router.post('/users/logout', auth , async( req,res) => {
+    console.log(req.token)
+    // req.user.tokens = req.user.tokens.filter((token) => {
+    //     return token.token !== req.token
+    // } )
 
-    res.send( req.user.token)
-
+   
     try{
-        // req.user.tokens = req.user.tokens.filter((token) => {
-        //     return token.token !== req.token
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token
+        } )
 
-        // } )
-
-        // await req.user.save();
-        // res.send()
+        await req.user.save();
+        res.send()
 
     }
     catch(e)
